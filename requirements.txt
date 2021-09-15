@@ -1,0 +1,6 @@
+# requirements.txt
+flask~=2.0.1
+flask-mysql
+requests~=2.26.0
+PyMySQL~=1.0.2
+PyYAML~=5.4.1
