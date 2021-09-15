@@ -6,4 +6,4 @@ pip install -r requirements.txt
 python main_schema.py
  
 # sample invocation from CLI:
-python levo.py -s C:\Users\vamsi\codegit\api_schema\uber.json -a CATALYST -v TRADESERVICE
+python levo.py -p uber.yaml -a CATALYST -s TRADESERVICE
