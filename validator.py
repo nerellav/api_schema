@@ -24,6 +24,7 @@ def validateFileType(defn):
     except:
         print("Unable to load as json")
         try:
+            #TODO: seems to be parsing non-yaml files too fine. Need to figure out a way to raise exception
             data = yaml.safe_load(defn)
             print("Loaded as yaml successfully.")
             result = FileType.YAML
