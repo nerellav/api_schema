@@ -18,7 +18,7 @@ args = parser.parse_args()
 # defining the api-endpoint
 API_ENDPOINT = "http://127.0.0.1:5000/create"
 
-# your API key here
+# TODO: your API key here
 API_KEY = "XXXXXXXXXXXXXXXXX"
 
 schema_file = open(args.pathspec.name, "r")
@@ -33,6 +33,7 @@ data = {'application': application,
         }
 
 print(data)
+#TODO: need to use SSL
 response = requests.post(url=API_ENDPOINT, json=data)
 
 print (response)

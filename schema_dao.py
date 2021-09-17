@@ -45,6 +45,7 @@ def createSchema(app_name, schema_type, defn, service_name='ALL'):
     # insert schema in database
     sqlQuery = "INSERT INTO api_schema(application,service,type,revision,defn) VALUES(%s, %s, %s, %s, %s)"
 
+    #TODO: same revision may come for different records; need to use a sequence instead of this.
     revision = getRevision(app_name, schema_type, service_name)
     print(revision)
 
