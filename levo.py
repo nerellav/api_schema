@@ -17,6 +17,7 @@ args = parser.parse_args()
 
 # defining the api-endpoint
 API_ENDPOINT = "http://127.0.0.1:5000/create"
+API_ENDPOINT = "https://api-schema.herokuapp.com/create"
 
 # TODO: your API key here
 API_KEY = "XXXXXXXXXXXXXXXXX"
