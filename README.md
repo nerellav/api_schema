@@ -3,7 +3,7 @@
 pip install -r requirements.txt
 
 # To start server process
-python main_schema.py
+python main.py
  
 # sample invocation from CLI:
 python levo.py -p uber.yaml -a CATALYST -s TRADESERVICE
