@@ -2,11 +2,12 @@ import pymysql
 
 from app import app
 from flaskext.mysql import MySQL
+import keyring
 
 # MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'b4cdf9d522bef1'
 # TODO: Remove plain text password
-app.config['MYSQL_DATABASE_PASSWORD'] = 'f536a02f'
+app.config['MYSQL_DATABASE_PASSWORD'] = keyring.get_password("MYSQL", "DB_PASSWORD")
 app.config['MYSQL_DATABASE_DB'] = 'heroku_06d7bc3ba0de240'
 app.config['MYSQL_DATABASE_HOST'] = 'us-cdbr-east-04.cleardb.com'
 

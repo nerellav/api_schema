@@ -12,12 +12,16 @@ parser.add_argument("-p", "--pathspec", type=argparse.FileType('r'), help="Path 
 parser.add_argument("-a", "--application", type=str, help="Application where the schema will be uploaded to.")
 parser.add_argument("-s", "--service", nargs='?', type=str, help="Service where the schema will be uploaded to.")
 
+parser.add_argument('-l', action='store_true')
+
 # parse the arguments from standard input
 args = parser.parse_args()
 
 # defining the api-endpoint
-API_ENDPOINT = "http://127.0.0.1:5000/create"
-API_ENDPOINT = "https://api-schema.herokuapp.com/create"
+if args.l:
+    API_ENDPOINT = "http://127.0.0.1:5000/create"
+else:
+    API_ENDPOINT = "https://api-schema.herokuapp.com/create"
 
 # TODO: your API key here
 API_KEY = "XXXXXXXXXXXXXXXXX"

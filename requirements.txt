@@ -61,3 +61,5 @@ uritemplate==3.0.1
 urllib3==1.26.6
 virtualenv==20.7.2
 Werkzeug==2.0.1
+keyring~=23.2.1
+keyrings.cryptfile
