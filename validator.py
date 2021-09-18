@@ -1,9 +1,7 @@
 import yaml
 ## Now, validating the yaml file is straightforward:
-from cerberus import Validator
 import sys, json
 import ruamel.yaml as yaml
-import filetype
 import enum
 
 
