@@ -24,7 +24,6 @@ def getRevision(app_name, schema_type, service_name='ALL'):
     row = cursor.fetchone()
     return row['revision']
 
-
 def getVersionsByAppName(app_name):
     cursor = conn.cursor(pymysql.cursors.DictCursor)
     # if the connection was lost, then it reconnects
@@ -34,6 +33,19 @@ def getVersionsByAppName(app_name):
     rows = cursor.fetchall()
     return rows
 
+def getSchemas():
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
+    conn.ping(reconnect=True)
+    cursor.execute("SELECT * FROM api_schema")
+    rows = cursor.fetchall()
+    return rows
+
+def getSchemaById(schema_id):
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
+    conn.ping(reconnect=True)
+    cursor.execute("SELECT * FROM api_schema where id = %s", (schema_id))
+    row = cursor.fetchone()
+    return row
 
 def getSchema(app_name, schema_type, service_name=None):
     cursor = conn.cursor(pymysql.cursors.DictCursor)

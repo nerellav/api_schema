@@ -1,4 +1,3 @@
-import pymysql
 from app import app
 from schema_dao import mysql
 from flask import jsonify
@@ -7,13 +6,14 @@ import schema_dao
 import validator
 from validator import FileType
 
-#TODO: need to add authorization
+
+# TODO: need to add authorization
 @app.route('/create', methods=['POST'])
 def create_schema():
     try:
         _json = request.json
 
-        print (_json)
+        print(_json)
         _application = _json['application']
         _service = _json['service'] or 'ALL'
         _defn = _json['defn']
@@ -34,6 +34,7 @@ def create_schema():
     except Exception as e:
         print(e)
 
+
 @app.route('/versions/<app_name>')
 def versions(app_name):
     try:
@@ -45,40 +46,27 @@ def versions(app_name):
     except Exception as e:
         print(e)
 
+
 @app.route('/schemas')
 def schemas():
     try:
-        conn = mysql.connect()
-        cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute("SELECT * FROM api_schema")
-        rows = cursor.fetchall()
+        rows = schema_dao.getSchemas()
         res = jsonify(rows)
         res.status_code = 200
-
         return res
     except Exception as e:
         print(e)
-    finally:
-        cursor.close()
-        conn.close()
 
 
 @app.route('/schema/<int:schema_id>', endpoint='schema')
 def schema(schema_id):
     try:
-        conn = mysql.connect()
-        cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute("SELECT * FROM api_schema WHERE id=%s", schema_id)
-        row = cursor.fetchone()
-        res = jsonify(row)
+        rows = schema_dao.getSchemaById(schema_id)
+        res = jsonify(rows)
         res.status_code = 200
-
         return res
     except Exception as e:
         print(e)
-    finally:
-        cursor.close()
-        conn.close()
 
 
 @app.errorhandler(404)
@@ -91,6 +79,7 @@ def not_found(error=None):
     res.status_code = 404
 
     return res
+
 
 if __name__ == "__main__":
     app.run()
