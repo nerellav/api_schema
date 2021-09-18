@@ -1,5 +1,4 @@
 from app import app
-from schema_dao import mysql
 from flask import jsonify
 from flask import flash, request
 import schema_dao
