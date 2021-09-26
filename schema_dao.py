@@ -62,13 +62,12 @@ def getSchema(app_name, schema_type, service_name=None):
 
 def createSchema(app_name, schema_type, defn, service_name='ALL'):
     # insert schema in database
-    sqlQuery = "INSERT INTO api_schema(application,service,type,revision,defn) VALUES(%s, %s, %s, %s, %s)"
+    sqlQuery = "INSERT INTO api_schema(application,service,type,revision,defn) VALUES(%s, %s, %s, (SELECT revision " \
+               "FROM (SELECT coalesce(MAX(REVISION),0)+1 as revision FROM api_schema WHERE application=%s AND " \
+               "service=%s AND type=%s) t ), %s) "
 
-    # TODO: same revision may come for different records; need to use a sequence instead of this.
-    revision = getRevision(app_name, schema_type, service_name)
-    print(revision)
     # TODO: Should have application & service in a different table
-    data = (app_name, service_name, schema_type, revision, defn)
+    data = (app_name, service_name, schema_type, app_name, service_name, schema_type, defn)
     cursor = conn.cursor(pymysql.cursors.DictCursor)
     # if the connection was lost, then it reconnects
     conn.ping(reconnect=True)
